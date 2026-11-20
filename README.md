@@ -1,6 +1,8 @@
 # The World in One Day — Friday 20 November 2026
 
-[![make.fun bounty](https://img.shields.io/badge/make.fun-news--image--20261120-6C4CF1)](https://make.fun/bounty/news-image-20261120)
+[![make.fun — news-image-20261120](https://make.fun/badge/news-image-20261120.svg)](https://make.fun/bounty/news-image-20261120)
+[![Rank](https://make.fun/badge/news-image-20261120/donghua9711-oss/news-image-20261120/rank.svg)](https://make.fun/bounty/news-image-20261120)
+[![Reward](https://make.fun/badge/news-image-20261120/donghua9711-oss/news-image-20261120/reward.svg)](https://make.fun/bounty/news-image-20261120)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Output](https://img.shields.io/badge/output-1024%C3%971024%20PNG%20%E2%89%A4%201%20MiB-blue)](entry.png)
 
