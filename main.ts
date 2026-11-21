@@ -5,23 +5,42 @@
 // compose.py and assets/). This program emits the finished
 // page as a single PNG image file — no network, no clock,
 // no randomness — so two runs are byte-identical.
+//
+// Grading runs this program in a fresh container whose
+// repository mount is READ-ONLY, so the page is written to
+// the output directory (MAKEFUN_OUTPUT_DIR, /output in the
+// grader) and nowhere else. An earlier version copied the
+// page beside this file instead and the graded run failed
+// with exit code 1 on the read-only mount; this version
+// writes only to the output directory, like the 20261119
+// edition's program, which grades clean.
 
-import { copyFileSync, readFileSync, statSync } from "node:fs";
+import {
+  copyFileSync,
+  mkdirSync,
+  readFileSync,
+  statSync,
+} from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const source = join(here, "entry.png");
-const target = join(here, "the-world-in-one-day-2026-11-20.png");
+const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const target = join(outDir, "entry.png");
 
 const MAX_BYTES = 1_048_576; // the bounty's 1 MiB cap
 const PNG_MAGIC = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a];
 
+mkdirSync(outDir, { recursive: true });
 copyFileSync(source, target);
 
 const bytes = statSync(target).size;
 if (bytes > MAX_BYTES) {
   throw new Error(`image is ${bytes} bytes, over the 1 MiB cap`);
+}
+if (bytes !== statSync(source).size) {
+  throw new Error("copy incomplete: output size differs from source");
 }
 
 const data = readFileSync(target);
